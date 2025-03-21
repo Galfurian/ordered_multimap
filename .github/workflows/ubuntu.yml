@@ -69,21 +69,16 @@ jobs:
 
     # Step: Install the required compiler and dependencies.
     - name: Install Compiler Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y ${{ matrix.pkgs }}
+      run: sudo apt-get update; sudo apt-get install -y ${{ matrix.pkgs }}
 
     # Step: Configure the project using CMake.
     - name: Configure Project
-      run: |
-        cmake -B build -DCMAKE_C_COMPILER=${{ env.CC }} -DCMAKE_CXX_COMPILER=${{ env.CXX }} -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON -DWARNINGS_AS_ERRORS=ON -DSTRICT_WARNINGS=ON
+      run: cmake -B build -DCMAKE_C_COMPILER=${{ env.CC }} -DCMAKE_CXX_COMPILER=${{ env.CXX }} -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON -DWARNINGS_AS_ERRORS=ON -DSTRICT_WARNINGS=ON
 
     # Step: Build Project.
     - name: Build Project
-      run: |
-        cmake --build build --config Debug --parallel 2
+      run: cmake --build build --config Debug --parallel 2
 
     # Step: Run Tests.
     - name: Run Tests
-      run: |
-        ctest --test-dir build --build-config Debug --verbose
+      run: ctest --test-dir build --build-config Debug --verbose

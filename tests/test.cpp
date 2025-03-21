@@ -258,10 +258,10 @@ void test_equal_range()
     table.insert("y", 20);
     table.insert("x", 12);
 
-    auto [begin, end] = table.equal_range("x");
+    auto range = table.equal_range("x");
 
     std::vector<int> values;
-    for (auto it = begin; it != end; ++it) {
+    for (auto it = range.first; it != range.second; ++it) {
         assert(it->first == "x");
         values.push_back(it->second);
     }
@@ -272,9 +272,9 @@ void test_equal_range()
     assert(values[2] == 12);
 
     // Also check for key with no match
-    auto [nbegin, nend] = table.equal_range("z");
-    assert(nbegin == table.end());
-    assert(nend == table.end());
+    auto nrange = table.equal_range("z");
+    assert(nrange.first == table.end());
+    assert(nrange.second == table.end());
 }
 
 void test_count()

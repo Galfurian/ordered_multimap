@@ -318,7 +318,10 @@ public:
     /// invalid or not found, the behavior is undefined.
     /// @param it The iterator to locate.
     /// @return The index of the iterator in the list.
-    auto index_of(const const_iterator &it) const -> std::size_t { return std::distance(list.begin(), it); }
+    auto index_of(const const_iterator &it) const -> std::size_t
+    {
+        return static_cast<std::size_t>(std::distance(list.begin(), it));
+    }
 
     /// @brief Returns an iterator to the element associated with the given key.
     /// @param key the key of the element to search for.
@@ -360,7 +363,7 @@ public:
     auto count(const Key &key) const -> std::size_t
     {
         auto range = table.equal_range(key);
-        return std::distance(range.first, range.second);
+        return static_cast<std::size_t>(std::distance(range.first, range.second));
     }
 
     /// @brief Sorts the internal list.

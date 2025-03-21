@@ -145,25 +145,35 @@ endif()
 # -----------------------------------------------------------------------------
 
 if(CLANG_TIDY_EXE)
-    file(GLOB_RECURSE PROJECT_HEADERS "${PROJECT_SOURCE_DIR}/include/**/*.hpp")
-    file(GLOB_RECURSE PROJECT_SOURCES "${PROJECT_SOURCE_DIR}/src/**/*.cpp")
+    file(GLOB_RECURSE ALL_PROJECT_FILES
+        "${PROJECT_SOURCE_DIR}/include/**/*.hpp"
+        "${PROJECT_SOURCE_DIR}/include/**/*.hh"
+        "${PROJECT_SOURCE_DIR}/include/**/*.h"
+        "${PROJECT_SOURCE_DIR}/include/*.hpp"
+        "${PROJECT_SOURCE_DIR}/include/*.hh"
+        "${PROJECT_SOURCE_DIR}/include/*.h"
+        "${PROJECT_SOURCE_DIR}/src/**/*.cpp"
+        "${PROJECT_SOURCE_DIR}/src/**/*.cc"
+        "${PROJECT_SOURCE_DIR}/src/**/*.c"
+        "${PROJECT_SOURCE_DIR}/src/*.cpp"
+        "${PROJECT_SOURCE_DIR}/src/*.cc"
+        "${PROJECT_SOURCE_DIR}/src/*.c"
+    )
     add_custom_target(
-        ordered_multimap_clang_tidy
+        ${PROJECT_NAME}_clang_tidy
         COMMAND ${CLANG_TIDY_EXE}
         --p=${CMAKE_BINARY_DIR}
-        ${PROJECT_HEADERS}
-        ${PROJECT_SOURCES}
+        ${ALL_PROJECT_FILES}
         COMMENT "Running clang-tidy"
         VERBATIM
     )
     add_custom_target(
-        ordered_multimap_clang_tidy_fix
+        ${PROJECT_NAME}_clang_tidy_fix
         COMMAND ${CLANG_TIDY_EXE}
-        --fix
+        --fix --fix-errors
         --p=${CMAKE_BINARY_DIR}
-        ${PROJECT_HEADERS}
-        ${PROJECT_SOURCES}
-        COMMENT "Running clang-tidy"
+        ${ALL_PROJECT_FILES}
+        COMMENT "Running clang-tidy-fix"
         VERBATIM
     )
 endif()
@@ -225,15 +235,28 @@ if(DOXYGEN_FOUND)
     # Exclude certain files or directories from documentation (if needed)
     set(DOXYGEN_EXCLUDE_PATTERNS "${PROJECT_SOURCE_DIR}/tests/*" "${PROJECT_SOURCE_DIR}/examples/*")
 
+    
     # Add Doxygen documentation target.
-    file(GLOB_RECURSE PROJECT_HEADERS "${PROJECT_SOURCE_DIR}/include/**/*.hpp")
-    file(GLOB_RECURSE PROJECT_SOURCES "${PROJECT_SOURCE_DIR}/src/**/*.cpp")
+    file(GLOB_RECURSE ALL_PROJECT_FILES
+        "${PROJECT_SOURCE_DIR}/include/**/*.hpp"
+        "${PROJECT_SOURCE_DIR}/include/**/*.hh"
+        "${PROJECT_SOURCE_DIR}/include/**/*.h"
+        "${PROJECT_SOURCE_DIR}/include/*.hpp"
+        "${PROJECT_SOURCE_DIR}/include/*.hh"
+        "${PROJECT_SOURCE_DIR}/include/*.h"
+        "${PROJECT_SOURCE_DIR}/src/**/*.cpp"
+        "${PROJECT_SOURCE_DIR}/src/**/*.cc"
+        "${PROJECT_SOURCE_DIR}/src/**/*.c"
+        "${PROJECT_SOURCE_DIR}/src/*.cpp"
+        "${PROJECT_SOURCE_DIR}/src/*.cc"
+        "${PROJECT_SOURCE_DIR}/src/*.c"
+    )
+
     doxygen_add_docs(
-        ordered_multimap_documentation
+        ${PROJECT_NAME}_documentation
         ${PROJECT_SOURCE_DIR}/README.md
         ${PROJECT_SOURCE_DIR}/LICENSE.md
-        ${PROJECT_HEADERS}
-        ${PROJECT_SOURCES}
+        ${ALL_PROJECT_FILES}
         COMMENT "Generating Doxygen documentation for the library"
     )
 endif()
