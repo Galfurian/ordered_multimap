@@ -1,4 +1,4 @@
-# Ordered Map
+# Ordered Multimap
 
 [![Ubuntu](https://github.com/Galfurian/ordered_multimap/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/Galfurian/ordered_multimap/actions/workflows/ubuntu.yml)
 [![Windows](https://github.com/Galfurian/ordered_multimap/actions/workflows/windows.yml/badge.svg)](https://github.com/Galfurian/ordered_multimap/actions/workflows/windows.yml)
