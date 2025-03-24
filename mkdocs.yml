@@ -1,4 +1,4 @@
-site_name: Command-Line Parsing
+site_name: Ordered Multimap
 theme:
   name: material
   primary: slate

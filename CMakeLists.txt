@@ -208,8 +208,8 @@ if(DOXYGEN_FOUND)
 
     # Customization: Doxygen Configuration
     set(DOXYGEN_WARN_FORMAT "$file:$line:1: $text")
-    set(DOXYGEN_PROJECT_NAME "Ordered Map")
-    set(DOXYGEN_PROJECT_BRIEF "An ordered map for C++")
+    set(DOXYGEN_PROJECT_NAME "Ordered Multimap")
+    set(DOXYGEN_PROJECT_BRIEF "An ordered multimap for C++")
     set(DOXYGEN_PROJECT_NUMBER "${PROJECT_MAJOR_VERSION}.${PROJECT_MINOR_VERSION}.${PROJECT_MICRO_VERSION}")
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE ${PROJECT_SOURCE_DIR}/README.md)
     set(DOXYGEN_SHOW_INCLUDE_FILES NO)
@@ -235,7 +235,6 @@ if(DOXYGEN_FOUND)
     # Exclude certain files or directories from documentation (if needed)
     set(DOXYGEN_EXCLUDE_PATTERNS "${PROJECT_SOURCE_DIR}/tests/*" "${PROJECT_SOURCE_DIR}/examples/*")
 
-    
     # Add Doxygen documentation target.
     file(GLOB_RECURSE ALL_PROJECT_FILES
         "${PROJECT_SOURCE_DIR}/include/**/*.hpp"
